@@ -60,17 +60,23 @@ app.post('/addStudent', (req,res)=>{
     let student = students.filter((value) => {
         return value.id == id
     })
-    if(student != null){
+    if(student.length == 0){
         students.push({...req.body});
         return res.json({'data': students})
     }
     return res.json({'message': 'Student already existed'});
 })
-// app.post('/addStudent', (req,res)=>{
-//     let body = req.body;
-//     console.log(body)
-//     return res.json({'message': 'Working with post request'});
-// })
+app.post('/getStudent', (req,res)=>{
+    let id = req.body.id;
+    let student = students.filter((value) => {
+        return value.id == id
+    })
+    if (student.length != 0) {
+        console.log(student)
+        return res.json({ 'data': student })
+    }
+    return res.json({ 'message': 'Student does not exist!!' });
+})
 // 3) put
 // 4) patch
 // 5) delete
